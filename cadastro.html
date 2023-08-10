@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>FORMULÁRIO DE CADASTRO - DESENVOLVIMENTO WEB</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+
+</head>
+<body>
+    <div>
+        <h1 style="text-align: center;">CADASTRO</h1>
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: center;">
+    <div class="container" style="min-width: 300px; max-width: 500px;  border-style: solid; border-color: black;">
+        <form action="POST"" >
+            <br><input style="width: 80%; margin-left: 10%;" type="text" id="nome" placeholder="Insira o Nome"><br>
+            <input style="width: 80%; margin-left: 10%;" type="text" name="sobrenome" id="sobrenome" placeholder="Insira o Sobrenome"><br>
+            <input style="width: 80%; margin-left: 10%;" type="text" name="email" id="email" placeholder="Insira o Email">
+            <h3 style="text-align: center; ">Confirmação de senha</h3>
+            <input style="width: 80%; margin-left: 10%;" type="password" name="senha" id="senha" placeholder="Insira sua senha"><br>
+            <input style="width: 80%; margin-left: 10%;" type="password" name="senha2" id="senha2" placeholder="Confirme a senha"><br><br>
+            <button type="button" class="button" onclick=getForm()>ENVIAR</button>
+            <button type="button" class="button" onclick=voltar()>VOLTAR</button>
+        </form>
+    </div>
+    </div>
+    <hr>
+
+    <div class="Container" id="message" name="message" style="text-align: center;">
+
+    </div>
+
+</body>
+
+<script>
+
+    function getForm() {
+        console.clear();
+        var nome = document.getElementById("nome").value;
+        var sobrenome = document.getElementById("sobrenome").value;
+        var email = document.getElementById("email").value;
+        var senha = document.getElementById("senha").value;
+        var senha2 = document.getElementById("senha2").value;
+
+        var messagem = document.getElementById("message");
+
+        if (nome == "" || sobrenome == "" || email == "") {
+            messagem.innerHTML = '<h3 style=" color: red;" id="ERRO">PREENCHA TODOS OS CAMPOS!!</h3>';
+        } else {
+
+            if (senha == "" || senha2 == "") {
+            messagem.innerHTML = '<h3 style=" color: red;" id="ERRO">PREENCHA TODOS OS CAMPOS DE SENHA!!</h3>';
+
+        } else if (senha != senha2){
+            messagem.innerHTML = '<h3 style=" color: red;" id="ERRO">AS SENHAS NÃO BATEM!!</h3>';
+        } else {
+            messagem.innerHTML = ""
+            messagem.innerHTML = messagem.innerHTML + "<hr><h3>Nome: " + nome + "</h3>";
+            messagem.innerHTML = messagem.innerHTML + "<h3>Sobrenome: " + sobrenome + "</h3>";
+            messagem.innerHTML = messagem.innerHTML + "<h3>Email: " + email + "</h3>";
+            messagem.innerHTML = messagem.innerHTML + "<h3>CADASTRADO COM SUCESSO</h3>";
+            messagem.innerHTML = messagem.innerHTML + '<h3 style=" color: red;" id="ERRO">Pena que isso ainda não funciona!!</h3>';
+        }
+
+        }
+
+    }
+
+    function voltar() {
+        window.location.href = "index.html";
+    }
+
+</script>
+
+</html>

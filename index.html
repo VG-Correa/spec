@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>PÁGINA PRINCIPAL</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div>
+            <h1 style="text-align: center;">LOGIN</h1>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: center;">
+            <div class="container" style="min-width: 300px; max-width: 500px;  border-style: solid; border-color: black;">
+                <form action="POST">
+                    <br>
+                    <input style="width: 80%; margin-left: 10%; text-align: center" type="email" name="email" id="email" placeholder="Insira o Email">
+                    <input style="width: 80%; margin-left: 10%; text-align: center" type="password" name="senha" id="senha" placeholder="Insira a senha"><br><br>
+                    <button type="button" class="button" onclick=logar()>LOGAR</button>
+                    <button type="button" class="button" onclick=cadastrar()>CADASTRAR-SE</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+        <div class="Container" id="message" name="message" style="text-align: center;">
+
+
+    </body>
+
+    <script>
+
+        function logar() {
+            var email = document.getElementById("email").value;
+            var senha = document.getElementById("senha").value;
+            var message = document.getElementById("message");
+
+            if (email != "" && senha != "") {
+
+                if (email == "teste@teste.com" && senha == "123@") {
+                    window.location.href = "pagina_inicial.html";
+                } else {
+                    message.innerHTML = '<h3 style=" color: red;" id="ERRO">CREDENCIAIS INCORRETAS!!</h3>';
+                }
+
+            } else {
+                message.innerHTML = '<h3 style=" color: red;" id="ERRO">PREENCHA TODOS OS CAMPOS!!</h3>';
+
+            }
+
+
+        }
+
+        function cadastrar() {
+            window.location.href = "cadastro.html";
+        }
+
+    </script>
+
+</html>
