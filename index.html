@@ -14,12 +14,11 @@
         <hr>
         <div style="display: flex; justify-content: center;">
             <div class="container" style="min-width: 300px; max-width: 500px;  border-style: solid; border-color: black;">
-                <form action="POST">
+                <form method="POST" action="banco_de_dados/usuarios/logar.php">
                     <br>
                     <input style="width: 80%; margin-left: 10%; text-align: center" type="email" name="email" id="email" placeholder="Insira o Email">
                     <input style="width: 80%; margin-left: 10%; text-align: center" type="password" name="senha" id="senha" placeholder="Insira a senha"><br><br>
-                    <button type="button" class="button" onclick=logar()>LOGAR</button>
-                    <button type="button" class="button" onclick=cadastrar()>CADASTRAR-SE</button>
+                    <button type="submit" value="Enviar" class="button">LOGAR</button>
                 </form>
             </div>
         </div>
