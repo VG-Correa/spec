@@ -1,15 +1,22 @@
 <?php
+    include_once("/wamp64/www/spec/funcoes_php/mensageiro.php");
 
-    function ler_arquivo(String $dir_arquivo): String {
+    global $mensageiro;
+    $mensageiro = new Mensageiro();
+
+    function ler_arquivo(String $dir_arquivo): mensagem {
+
         $arquivo_exists = file_exists($dir_arquivo);
         if (!$arquivo_exists) {
-            return "Erro - Diretório: ".$dir_arquivo." não encontrado!";
+            global $mensageiro;
+            return $mensageiro->_Erro("Diretório: ".$dir_arquivo." não foi encontrado", null);
         } else {
+            global $mensageiro;
 
             $arquivo = fopen($dir_arquivo,'r');
             $arquivo_readed = fread($arquivo, filesize($dir_arquivo));
             fclose($arquivo);
-            return $arquivo_readed;
+            return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
         }
  
     }

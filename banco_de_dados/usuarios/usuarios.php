@@ -13,12 +13,13 @@
      * Retorna uma lista com os dados do usuário em cada linha
      * Em caso de Erro, retorna array
      */
-    function Usuarios_readBD(): array {
+    function Usuarios_readBD(): mensagem {
 
-        $arquivo = ler_arquivo('usuarios.txt');
+        $arquivo = ler_arquivo('usuarios.txt')->objeto;
 
         if (str_starts_with($arquivo,"Erro")) {
-            return ["Status"=>"Erro","Mensagem"=>"Não foi possível localizar o diretório usuarios.txt"];
+            global $mensageiro;
+            return $mensageiro->_Erro("Não foi possível localizar o diretório usuarios.txt",null);
         } else {
 
             $arquivo = str_getcsv($arquivo,separator: "\n");
@@ -85,7 +86,7 @@
 
     }
 
-    $user = Logar('teste@teste.caom', "123@", 'Victsor');
+    $user = Logar('teste@teste.caom', "123@", 'Victor');
     $user->toggle_logado();
 
     echo $user->get_nome();
