@@ -14,11 +14,29 @@
             global $mensageiro;
 
             $arquivo = fopen($dir_arquivo,'r');
-            $arquivo_readed = fread($arquivo, filesize($dir_arquivo));
-            fclose($arquivo);
-            return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
+            return $mensageiro->_Sucesso("Arquivo do diretório ".$dir_arquivo." encontrado com sucesso",$arquivo);
         }
+    }
+
+    function Transform_Arquivo_to_String($arquivo="", $dir_arquivo=""): String { 
+            global $mensageiro;
+
+            if ($dir_arquivo) {
+                $arquivo_readed = fread($arquivo, filesize($dir_arquivo));
+                fclose($arquivo);
+                return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
+            
+            } else if ($arquivo and $dir_arquivo) {
+                
+            }
+    }
  
+
+    function Inserir_novo_usuario(Array $usuarios) {
+
+
+
+
     }
 
 ?>

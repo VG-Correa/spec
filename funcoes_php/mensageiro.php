@@ -34,7 +34,8 @@
         public function get_mensagem(): String {
             return $this->mensagem;
         }
-        public function get_objeto(): Object {
+        public function get_objeto() {
+            
             return $this->objeto;
         }
     }

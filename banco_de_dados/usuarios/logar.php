@@ -1,13 +1,21 @@
 <?php 
-
-    echo "Hello";
-
-    include_once ('/XAMP/htdocs/spec/funcoes_php/diretorios.php');
+    include("/wamp64/www/spec/banco_de_dados/usuarios/usuarios.php");
 
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    echo $email;
-    echo $senha;
+    echo "<br>Email: ".$email;
+    echo "<br>Senha: ".$senha;
+
+    $user = Autenticar($email, $senha);
+    echo '<br>Status: '.$user->get_status();
+
+    // die("<br>Teste");
+
+    if ($user->get_status() == "Sucesso") {
+        header("location: /spec/pagina_inicial.html");
+    } else {
+        header("location: /spec/index.html"); 
+    }
 
 ?>
