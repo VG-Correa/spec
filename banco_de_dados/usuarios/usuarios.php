@@ -15,7 +15,7 @@
      */
     function Usuarios_readBD(): mensagem {
 
-        $arquivo = Transform_Arquivo_to_String(ler_arquivo('usuarios.txt')->get_objeto());
+        $arquivo = Transform_Arquivo_to_String(ler_arquivo('usuarios.txt')->get_objeto(),"usuarios.txt");
         
         if ($arquivo->get_status() == "Erro") {
             global $mensageiro;
@@ -123,21 +123,54 @@
     }
 
     function Usuarios_Insert(String $email, String $nome, String $senha) {
+        global $mensageiro;
 
         $novo_id = Usuarios_ultimoID();
 
         if ($novo_id->get_status() == "Sucesso") {
 
             $usuarios = Usuarios_readBD()->get_objeto();
-            var_dump($usuarios);
+            
+            foreach ($usuarios as $index => $usuario) {
+                if ($usuario[2] == $email) {
+                    return $mensageiro->_Erro("Email já está cadastrado",null);
+                }
+            }
 
+            $novo_usuario = [(String) ($novo_id->get_objeto() + 1), $nome, $email, $senha, "1"];
+            
+            $usuarios[$novo_id->get_objeto()+1] = $novo_usuario;
+            
+            $inserted = BD_insert($usuarios);
+
+            if ($inserted->get_status()=="Sucesso") {
+                return $mensageiro->_Sucesso("")
+            }
 
         }
 
-        // $novo_usuario = new Usuario();
+        
 
     }
 
-    Usuarios_Insert("teste3@teste.com", "Corrêa", "123@");
+    function BD_insert(Array $usuarios): mensagem {
+        global $mensageiro;
+
+        $texto = "id,nome,email,senha,status";
+
+        foreach ($usuarios as $index => $usuario) {
+            
+            $texto .= "\n$usuario[0],$usuario[1],$usuario[2],$usuario[3],$usuario[4]";
+            
+        }
+        
+        $arquivo = fopen("usuarios.txt", "w");
+        fwrite($arquivo,$texto);
+
+        return $mensageiro->_Sucesso("teste", null);
+    }
+
+    $inserted = Usuarios_Insert("teste4@teste.com", "Corrêa", "123@");
+    var_dump($inserted);
 
 ?>

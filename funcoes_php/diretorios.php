@@ -18,17 +18,38 @@
         }
     }
 
-    function Transform_Arquivo_to_String($arquivo="", $dir_arquivo=""): String { 
-            global $mensageiro;
+    function Transform_Arquivo_to_String($arquivo="", $dir_arquivo=""): mensagem { 
+        global $mensageiro;
 
-            if ($dir_arquivo) {
-                $arquivo_readed = fread($arquivo, filesize($dir_arquivo));
-                fclose($arquivo);
-                return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
-            
-            } else if ($arquivo and $dir_arquivo) {
+        if ($arquivo and $dir_arquivo) {
+
+            $arquivo_readed = fread($arquivo, filesize($dir_arquivo));
+            fclose($arquivo);
+            return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
+        
+        } else if ($arquivo and !$dir_arquivo) {
+            return $mensageiro->_Erro("Diretório não atribuido!", null);
+
+        } else if (!$arquivo and $dir_arquivo) {
+            $arquivo = ler_arquivo($dir_arquivo);
+
+            if ($arquivo->get_status() == "Sucesso") {
                 
+                $arquivo_readed = fread($arquivo->get_objeto(), filesize($dir_arquivo));
+                fclose($arquivo->get_objeto());
+                return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
+                
+            } else {
+                return $mensageiro->_Erro("Arquivo não foi localizado no diretório: $dir_arquivo", null);
             }
+
+        } else if (!$arquivo and !$dir_arquivo) {
+
+            return $mensageiro->_Erro("Critérios não atribuidos!!", null);
+
+        } else {
+            return $mensageiro->_Erro("Erro inesperado", null);
+        }
     }
  
 
