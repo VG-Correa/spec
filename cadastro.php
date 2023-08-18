@@ -28,11 +28,16 @@
             <?php
                 session_start();
                 
-                if ($_SESSION['cadastro'] == "Erro") {
-                    echo "<tr><label>Email já cadastrado...</label>";
+                try{
+
+                    if ($_SESSION['cadastro'] == "Erro") {
+                        echo "<tr><label>Email já cadastrado...</label>";
+                    }
+                    
+                    $_SESSION['cadastro'] = "pendente";
+                } catch (Exception) {
+                    $_SESSION['cadastro'] = "pendente";
                 }
-                
-                $_SESSION['cadastro'] = "pendente";
                 
             ?>
             <button type="submit" value = "Enviar" class="button">ENVIAR</button>

@@ -13,9 +13,9 @@
     // die("<br>Teste");
 
     if ($user->get_status() == "Sucesso") {
-        header("location: /spec/pagina_inicial.html");
+        header("location: /spec/pagina_inicial.php");
     } else {
-        header("location: /spec/index.html"); 
+        header("location: /spec/index.php"); 
     }
 
 ?>

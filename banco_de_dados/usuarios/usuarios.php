@@ -28,7 +28,6 @@
             foreach ($arquivo as $index => $linha) {
 
                 $arquivo[$index] = str_getcsv($arquivo[$index],',');
-
             }
 
             $arquivo = array_slice($arquivo,1);
@@ -69,12 +68,13 @@
         $user_find = [];
 
         foreach ($usuarios as $usuario) {
-
-            if ($usuario[0] == $id) {
+            var_dump($usuario);
+            if ((String) $usuario[0] == $id) {
                 $user_find = $usuario;
             }
 
         }
+
 
         if ($user_find) {
             $user_find = new Usuario($user_find[0],$user_find[1],$user_find[2],$user_find[3],$user_find[4]);
@@ -133,23 +133,27 @@
             
             foreach ($usuarios as $index => $usuario) {
                 if ($usuario[2] == $email) {
+
                     return $mensageiro->_Erro("Email já está cadastrado",null);
                 }
             }
 
-            $novo_usuario = [(String) ($novo_id->get_objeto() + 1), $nome, $email, $senha, "1"];
+            $novo_id = $novo_id->get_objeto()+1;
+            $novo_usuario = [(String) ($novo_id), $nome, $email, $senha, "1"];
             
-            $usuarios[$novo_id->get_objeto()+1] = $novo_usuario;
+            $usuarios[$novo_id] = $novo_usuario;
             
+            var_dump($novo_id);
             $inserted = BD_insert($usuarios);
-
+            
+            
             if ($inserted->get_status()=="Sucesso") {
-                return $mensageiro->_Sucesso("")
+                return $mensageiro->_Sucesso("Usuário $nome inserido com sucesso",Usuarios_get_UserByID($novo_id)->get_objeto());
+            } else {
+                return $mensageiro->_Erro("Usuário não pode ser registrado!");
             }
 
         }
-
-        
 
     }
 
@@ -166,11 +170,7 @@
         
         $arquivo = fopen("usuarios.txt", "w");
         fwrite($arquivo,$texto);
-
+        fclose($arquivo);
         return $mensageiro->_Sucesso("teste", null);
     }
-
-    $inserted = Usuarios_Insert("teste4@teste.com", "Corrêa", "123@");
-    var_dump($inserted);
-
 ?>

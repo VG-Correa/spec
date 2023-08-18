@@ -1,5 +1,4 @@
 <?php
-echo "<hr>";
 
 $var1 = readline("Digite o primeiro valor");
 $var2 = readline("Digite o segundo valor");

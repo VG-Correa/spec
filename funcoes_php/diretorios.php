@@ -28,6 +28,7 @@
             return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
         
         } else if ($arquivo and !$dir_arquivo) {
+            fclose($arquivo);
             return $mensageiro->_Erro("Diretório não atribuido!", null);
 
         } else if (!$arquivo and $dir_arquivo) {
@@ -40,6 +41,7 @@
                 return $mensageiro->_Sucesso("Diretório ".$dir_arquivo." encontrado com sucesso",$arquivo_readed);
                 
             } else {
+                fclose($arquivo->get_objeto());
                 return $mensageiro->_Erro("Arquivo não foi localizado no diretório: $dir_arquivo", null);
             }
 

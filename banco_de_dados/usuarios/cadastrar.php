@@ -2,9 +2,9 @@
 
 include("/wamp64/www/spec/banco_de_dados/usuarios/usuarios.php");
 
-echo $nome = $_POST["nome"]."<br>";
-echo $email = $_POST["email"]."<br>";
-echo $senha = $_POST["senha"]."<br>";
+echo $nome = $_POST["nome"];
+echo $email = $_POST["email"];
+echo $senha = $_POST["senha"];
 
 $inserted = Usuarios_Insert($email, $nome, $senha);
 
